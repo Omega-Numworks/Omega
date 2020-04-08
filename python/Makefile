@@ -6,6 +6,7 @@ SFLAGS += -I$(BUILD_DIR)/python/port
 # - Copy PY_CORE_O_BASENAME from py.mk into py_src
 # - Copy select PY_EXTMOD_O_BASENAME from py.mk into extmod_src
 # - Edit special-case workarounds below as needed
+# - Add all C files found in extmod/ulab/code/micropython.mk to ulab_src
 
 py_src = $(addprefix python/src/py/,\
   mpstate.c \
@@ -13,6 +14,7 @@ py_src = $(addprefix python/src/py/,\
   nlrx86.c \
   nlrx64.c \
   nlrthumb.c \
+  nlrpowerpc.c \
   nlrxtensa.c \
   nlrsetjmp.c \
   malloc.c \
@@ -43,6 +45,7 @@ py_src = $(addprefix python/src/py/,\
   asmxtensa.c \
   emitnxtensa.c \
   emitinlinextensa.c \
+  emitnxtensawin.c \
   formatfloat.c \
   parsenumbase.c \
   parsenum.c \
@@ -52,9 +55,12 @@ py_src = $(addprefix python/src/py/,\
   runtime_utils.c \
   scheduler.c \
   nativeglue.c \
+  pairheap.c \
+  ringbuf.c \
   stackctrl.c \
   argcheck.c \
   warning.c \
+  profile.c \
   map.c \
   obj.c \
   objarray.c \
@@ -126,6 +132,19 @@ extmod_src += $(addprefix python/src/extmod/,\
   modurandom.c \
 )
 
+ulab_src += $(addprefix python/src/extmod/ulab/code/,\
+  ndarray.c \
+  create.c \
+  linalg.c \
+  vectorise.c \
+  poly.c \
+  fft.c \
+  numerical.c \
+  filter.c \
+  extras.c \
+  ulab.c \
+)
+
 port_src += $(addprefix python/port/,\
   port.c \
   builtins.c \
@@ -175,7 +194,7 @@ ifeq ($(PLATFORM),emscripten)
 $(call object_for,$(py_src)): SFLAGS := $(subst -Os,-O0,$(SFLAGS))
 endif
 
-python_src = $(py_src) $(extmod_src) $(port_src)
+python_src = $(py_src) $(extmod_src) $(ulab_src) $(port_src)
 
 # QSTR generation
 

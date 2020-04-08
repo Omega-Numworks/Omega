@@ -72,7 +72,8 @@
 // Whether to provide "array" module. Note that large chunk of the
 // underlying code is shared with "bytearray" builtin type, so to
 // get real savings, it should be disabled too.
-#define MICROPY_PY_ARRAY (0)
+// However, it is required for ulab.
+#define MICROPY_PY_ARRAY (1)
 
 // Whether to support attrtuple type (MicroPython extension)
 // It provides space-efficient tuples with attribute access
@@ -143,3 +144,4 @@ extern const struct _mp_obj_module_t modturtle_module;
     { MP_ROM_QSTR(MP_QSTR_time), MP_ROM_PTR(&modtime_module) }, \
     { MP_ROM_QSTR(MP_QSTR_turtle), MP_ROM_PTR(&modturtle_module) }, \
 
+#define MODULE_ULAB_ENABLED (1)

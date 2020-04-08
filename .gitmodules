@@ -7,3 +7,6 @@
 [submodule "themes"]
 	path = themes
 	url = https://github.com/Omega-Numworks/Omega-Themes.git
+[submodule "python/src/extmod/ulab"]
+	path = python/src/extmod/ulab
+	url = https://github.com/v923z/micropython-ulab.git
