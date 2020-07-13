@@ -23,6 +23,7 @@ app_code_src = $(addprefix apps/code/,\
   script_node_cell.cpp \
   script_parameter_controller.cpp \
   script_store.cpp \
+  toolbox_ion_keys.cpp \
   variable_box_controller.cpp \
 )
 
