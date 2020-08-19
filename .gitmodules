@@ -7,3 +7,10 @@
 [submodule "themes"]
 	path = themes
 	url = https://github.com/Omega-Numworks/Omega-Themes.git
+[submodule "discord-rpc/discord-rpc"]
+	path = discord-rpc/discord-rpc
+	url = https://github.com/discord/discord-rpc.git
+	branch = master
+[submodule "discord-rpc/rapidjson"]
+	path = discord-rpc/rapidjson
+	url = https://github.com/Tencent/rapidjson.git

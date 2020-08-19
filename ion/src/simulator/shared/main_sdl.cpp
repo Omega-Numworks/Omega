@@ -15,6 +15,10 @@
 #include <vector>
 #include <string>
 
+#if RPC
+#include <discord.h>
+#endif
+
 static bool argument_screen_only = false;
 static bool argument_fullscreen = false;
 static bool argument_unresizable = false;
@@ -209,6 +213,14 @@ static SDL_Texture * sBackgroundTexture = nullptr;
 static bool sNeedsRefresh = false;
 static SDL_Rect sScreenRect;
 
+#if RPC
+static discord::OmegaDiscordRPC sRPC;
+
+void setApp(App::Descriptor * descriptor) {
+  sRPC.setApp(descriptor);
+}
+#endif
+
 void init() {
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
     SDL_Log("Could not init video");
@@ -323,6 +335,9 @@ void refresh() {
 }
 
 void quit() {
+  #if RPC
+  sRPC.deinit();
+  #endif
   SDL_DestroyWindow(sWindow);
   SDL_Quit();
 }

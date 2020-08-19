@@ -7,6 +7,9 @@
 #include <poincare/exception_checkpoint.h>
 #include <ion/backlight.h>
 #include <poincare/preferences.h>
+#if RPC
+#include "../ion/src/simulator/shared/main.h"
+#endif
 
 extern "C" {
 #include <assert.h>
@@ -251,6 +254,10 @@ bool AppsContainer::switchTo(App::Snapshot * snapshot) {
   if (snapshot) {
     m_window.setTitle(snapshot->descriptor()->upperName());
   }
+  #if RPC
+  if(snapshot != nullptr && snapshot->descriptor() != nullptr)
+    Ion::Simulator::Main::setApp(snapshot->descriptor());
+  #endif
   return Container::switchTo(snapshot);
 }
 
