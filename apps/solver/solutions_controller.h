@@ -61,7 +61,7 @@ private:
 
   class MessageCell : public HighlightCell {
   public:
-    MessageCell() : m_messageView(KDFont::SmallFont, (I18n::Message)0, 0.0f, k_verticalAlignment, KDColorBlack, SolutionsController::ContentView::k_backgroundColor) {}
+    MessageCell() : m_messageView(KDFont::SmallFont, (I18n::Message)0, 0.0f, k_verticalAlignment) {}
     void setBackgroundColor(KDColor color) { m_messageView.setBackgroundColor(color); }
     void setHorizontalAlignment(float alignment) { m_messageView.setAlignment(alignment, k_verticalAlignment); }
     void setMessage(I18n::Message message) { m_messageView.setMessage(message); }

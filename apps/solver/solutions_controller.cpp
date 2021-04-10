@@ -20,8 +20,8 @@ namespace Solver {
 constexpr KDColor SolutionsController::ContentView::k_backgroundColor;
 
 SolutionsController::ContentView::ContentView(SolutionsController * controller) :
-  m_warningMessageView0(KDFont::SmallFont, I18n::Message::Default, 0.5f, 0.5f, KDColorBlack, k_backgroundColor),
-  m_warningMessageView1(KDFont::SmallFont, I18n::Message::Default, 0.5f, 0.5f, KDColorBlack, k_backgroundColor),
+  m_warningMessageView0(KDFont::SmallFont, I18n::Message::Default, 0.5f, 0.5f),
+  m_warningMessageView1(KDFont::SmallFont, I18n::Message::Default, 0.5f, 0.5f),
   m_selectableTableView(controller, controller, controller, controller),
   m_displayWarningMoreSolutions(false)
 {

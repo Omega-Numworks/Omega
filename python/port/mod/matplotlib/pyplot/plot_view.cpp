@@ -1,10 +1,11 @@
 #include "plot_view.h"
 #include <algorithm>
+#include <escher/palette.h>
 
 namespace Matplotlib {
 
 void PlotView::drawRect(KDContext * ctx, KDRect rect) const {
-  ctx->fillRect(rect, KDColorWhite);
+  ctx->fillRect(rect, Palette::BackgroundHard);
 
   if (m_store->gridRequested()) {
     drawGrid(ctx, rect);

@@ -9,6 +9,7 @@ extern "C" {
 #include <kandinsky.h>
 #include <math.h>
 #include <python/port/port.h>
+ #include <escher/palette.h> 
 
 /* We check for keyboard interruptions using micropython_port_vm_hook_loop and
  * micropython_port_interruptible_msleep, but even if we catch an interruption,
@@ -98,7 +99,7 @@ private:
   static constexpr KDCoordinate k_yOffset = (Ion::Display::Height - Metric::TitleBarHeight) / 2;
   static constexpr uint8_t k_defaultSpeed = 8;
   static constexpr uint8_t k_maxSpeed = 10;
-  static constexpr KDColor k_defaultColor = KDColorBlack;
+  static constexpr KDColor k_defaultColor = Palette::PrimaryText;
   static constexpr uint8_t k_defaultPenSize = 1;
   static constexpr const KDFont * k_font = KDFont::LargeFont;
   static constexpr mp_float_t k_maxPosition = KDCOORDINATE_MAX * 0.75f;
