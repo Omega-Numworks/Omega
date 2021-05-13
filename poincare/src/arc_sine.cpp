@@ -1,7 +1,14 @@
 #include <poincare/arc_sine.h>
+#include <poincare/addition.h>
 #include <poincare/complex.h>
+#include <poincare/derivative.h>
+#include <poincare/division.h>
 #include <poincare/layout_helper.h>
+#include <poincare/opposite.h>
+#include <poincare/power.h>
 #include <poincare/serialization_helper.h>
+#include <poincare/square_root.h>
+#include <poincare/subtraction.h>
 
 #include <cmath>
 
@@ -48,6 +55,14 @@ Complex<T> ArcSineNode::computeOnComplex(const std::complex<T> c, Preferences::C
   return Complex<T>::Builder(Trigonometry::ConvertRadianToAngleUnit(result, angleUnit));
 }
 
+bool ArcSineNode::derivate(ReductionContext reductionContext, Expression symbol, Expression symbolValue) {
+  return ArcSine(this).derivate(reductionContext, symbol, symbolValue);
+}
+
+Expression ArcSineNode::unaryFunctionDifferential(ReductionContext reductionContext) {
+  return ArcSine(this).unaryFunctionDifferential(reductionContext);
+}
+
 
 Expression ArcSine::shallowReduce(ExpressionNode::ReductionContext reductionContext) {
   {
@@ -58,6 +73,15 @@ Expression ArcSine::shallowReduce(ExpressionNode::ReductionContext reductionCont
     }
   }
   return Trigonometry::shallowReduceInverseFunction(*this, reductionContext);
+}
+
+bool ArcSine::derivate(ExpressionNode::ReductionContext reductionContext, Expression symbol, Expression symbolValue) {
+  Derivative::DerivateUnaryFunction(*this, symbol, symbolValue, reductionContext);
+  return true;
+}
+
+Expression ArcSine::unaryFunctionDifferential(ExpressionNode::ReductionContext reductionContext) {
+  return Division::Builder(Rational::Builder(1), SquareRoot::Builder(Addition::Builder(Rational::Builder(1), Opposite::Builder(Power::Builder(childAtIndex(0).clone(), Rational::Builder(2))))));
 }
 
 }

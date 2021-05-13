@@ -1,6 +1,11 @@
 #include <poincare/arc_tangent.h>
+#include <poincare/addition.h>
 #include <poincare/complex.h>
+#include <poincare/derivative.h>
+#include <poincare/division.h>
 #include <poincare/layout_helper.h>
+#include <poincare/power.h>
+#include <poincare/rational.h>
 #include <poincare/serialization_helper.h>
 
 #include <cmath>
@@ -44,6 +49,14 @@ Complex<T> ArcTangentNode::computeOnComplex(const std::complex<T> c, Preferences
   return Complex<T>::Builder(Trigonometry::ConvertRadianToAngleUnit(result, angleUnit));
 }
 
+bool ArcTangentNode::derivate(ReductionContext reductionContext, Expression symbol, Expression symbolValue) {
+  return ArcTangent(this).derivate(reductionContext, symbol, symbolValue);
+}
+
+Expression ArcTangentNode::unaryFunctionDifferential(ReductionContext reductionContext) {
+  return ArcTangent(this).unaryFunctionDifferential(reductionContext);
+}
+
 Expression ArcTangentNode::shallowReduce(ReductionContext reductionContext) {
   return ArcTangent(this).shallowReduce(reductionContext);
 }
@@ -57,6 +70,15 @@ Expression ArcTangent::shallowReduce(ExpressionNode::ReductionContext reductionC
     }
   }
   return Trigonometry::shallowReduceInverseFunction(*this, reductionContext);
+}
+
+bool ArcTangent::derivate(ExpressionNode::ReductionContext reductionContext, Expression symbol, Expression symbolValue) {
+  Derivative::DerivateUnaryFunction(*this, symbol, symbolValue, reductionContext);
+  return true;
+}
+
+Expression ArcTangent::unaryFunctionDifferential(ExpressionNode::ReductionContext reductionContext) {
+  return Division::Builder(Rational::Builder(1), Addition::Builder(Power::Builder(childAtIndex(0).clone(), Rational::Builder(2)), Rational::Builder(1))); 
 }
 
 }
