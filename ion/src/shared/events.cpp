@@ -60,6 +60,11 @@ bool Event::isDefined() const  {
   }
 }
 
+Keyboard::Key Event::toKey() const {
+  assert(isKeyboardEvent());
+  return static_cast<Keyboard::Key>(m_id % PageSize);
+}
+
 const char * Event::defaultText() const {
   /* As the ExternalText event is only available on the simulator, we save a
    * comparison by not handling it on the device. */

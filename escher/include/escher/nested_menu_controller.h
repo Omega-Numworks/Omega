@@ -62,7 +62,7 @@ protected:
   static constexpr int LeafCellType = 0;
   static constexpr int NodeCellType = 1;
   int stackDepth() const;
-  bool handleEventForRow(Ion::Events::Event event, int selectedRow);
+  virtual bool handleEventForRow(Ion::Events::Event event, int selectedRow);
   virtual bool selectSubMenu(int selectedRow);
   virtual bool returnToPreviousMenu();
   virtual bool selectLeaf(int selectedRow) = 0;

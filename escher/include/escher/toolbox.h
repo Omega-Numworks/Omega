@@ -21,6 +21,7 @@ public:
 
 protected:
   constexpr static int k_maxMessageSize = 100;
+  bool handleEventForRow(Ion::Events::Event event, int selectedRow) override;
   bool selectSubMenu(int selectedRow) override;
   bool returnToPreviousMenu() override;
   virtual int maxNumberOfDisplayedRows() = 0;

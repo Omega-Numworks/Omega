@@ -46,6 +46,22 @@ int Toolbox::typeAtLocation(int i, int j) {
   return NodeCellType;
 }
 
+bool Toolbox::handleEventForRow(Ion::Events::Event event, int selectedRow) {
+  if (event.isKeyboardEvent()) {
+    uint8_t key = static_cast<uint8_t>(event.toKey());
+    uint8_t min = static_cast<uint8_t>(Ion::Keyboard::Key::Exp);
+    uint8_t max = static_cast<uint8_t>(Ion::Keyboard::Key::Plus) - min;
+    key-=min;
+    if (key >= 0 && key <= max) {
+      if (key <= numberOfRows()) {
+        m_selectableTableView.selectCellAtClippedLocation(m_selectableTableView.selectedColumn(), key);
+        return NestedMenuController::handleEventForRow(Ion::Events::OK, key);
+      }
+    }
+  }
+  return NestedMenuController::handleEventForRow(event, selectedRow);
+}
+
 bool Toolbox::selectSubMenu(int selectedRow) {
   m_selectableTableView.deselectTable();
   m_messageTreeModel = static_cast<const ToolboxMessageTree *>(m_messageTreeModel->childAtIndex(selectedRow));
