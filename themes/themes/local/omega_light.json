@@ -1,19 +1,22 @@
 {
     "name": "Omega Light",
     "icons": "omega_light",
+    "version": 2,
     "colors": {
-        "PrimaryText": "000000",
-        "SecondaryText": "6e6e6e",
-        "AccentText": "00857f",
-        "ApproximateSignText": "595959",
-        "ApproximateExpressionText": "595959",
+        "Main": {
+            "PrimaryText": "000000",
+            "SecondaryText": "6e6e6e",
+            "AccentText": "00857f",
+            "ApproximateSignText": "595959",
+            "ApproximateExpressionText": "595959"
+        },
         "Background": {
             "Hard": "ffffff",
             "Apps": "fafafa",
             "AppsSecondary": "f0f0f0"
         },
         "Toolbar": {
-            "": "c03535",
+            "Main": "c03535",
             "Text": "ffffff"
         },
         "ExpressionInput": {
@@ -25,7 +28,7 @@
             "SecondaryLine": "f5f5f5"
         },
         "Battery": {
-            "": "ffffff",
+            "Main": "ffffff",
             "InCharge": "179e1f",
             "Low": "992321"
         },
@@ -34,7 +37,7 @@
             "Background": "d9d9d9"
         },
         "Control": {
-            "": "00857f",
+            "Main": "00857f",
             "Enabled": "00b2b0",
             "Disabled": "9e9e9e"
         },

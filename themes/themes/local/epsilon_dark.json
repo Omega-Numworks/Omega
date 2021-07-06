@@ -1,19 +1,22 @@
 {
     "name": "Epsilon Dark",
     "icons": "epsilon_light",
+    "version": 2,
     "colors": {
-        "PrimaryText": "ffffff",
-        "SecondaryText": "585858",
-        "AccentText": "ffb734",
-        "ApproximateSignText": "737373",
-        "ApproximateExpressionText": "737373",
+        "Main": {
+            "PrimaryText": "ffffff",
+            "SecondaryText": "585858",
+            "AccentText": "ffb734",
+            "ApproximateSignText": "737373",
+            "ApproximateExpressionText": "737373"
+        },
         "Background": {
             "Hard": "000000",
             "Apps": "080605",
             "AppsSecondary": "1f1912"
         },
         "Toolbar": {
-            "": "ffb734",
+            "Main": "ffb734",
             "Text": "000000"
         },
         "ExpressionInput": {
@@ -25,7 +28,7 @@
             "SecondaryLine": "0a0a0a"
         },
         "Battery": {
-            "": "000000",
+            "Main": "000000",
             "InCharge": "ffcc7b",
             "Low": "f30211"
         },
@@ -34,7 +37,7 @@
             "Background": "262626"
         },
         "Control": {
-            "": "ffb734",
+            "Main": "ffb734",
             "Enabled": "ffb734",
             "Disabled": "585858"
         },

@@ -1,19 +1,22 @@
 {
     "name": "Omega Dark",
     "icons": "omega_dark",
+    "version": 2,
     "colors": {
-        "PrimaryText": "ffffff",
-        "SecondaryText": "949494",
-        "AccentText": "00857f",
-        "ApproximateSignText": "a6a6a6",
-        "ApproximateExpressionText": "a6a6a6",
+        "Main": {
+            "PrimaryText": "ffffff",
+            "SecondaryText": "949494",
+            "AccentText": "00857f",
+            "ApproximateSignText": "a6a6a6",
+            "ApproximateExpressionText": "a6a6a6"
+        },
         "Background": {
             "Hard": "000000",
             "Apps": "050505",
             "AppsSecondary": "0f0f0f"
         },
         "Toolbar": {
-            "": "c03535",
+            "Main": "c03535",
             "Text": "ffffff"
         },
         "ExpressionInput": {
@@ -25,7 +28,7 @@
             "SecondaryLine": "0a0a0a"
         },
         "Battery": {
-            "": "ffffff",
+            "Main": "ffffff",
             "InCharge": "179e1f",
             "Low": "992321"
         },
@@ -34,7 +37,7 @@
             "Background": "262626"
         },
         "Control": {
-            "": "00857f",
+            "Main": "00857f",
             "Enabled": "00b2b0",
             "Disabled": "616161"
         },

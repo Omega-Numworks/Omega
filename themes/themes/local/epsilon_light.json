@@ -1,19 +1,22 @@
 {
     "name": "Epsilon Light",
     "icons": "epsilon_light",
+    "version": 2,
     "colors": {
-        "PrimaryText": "000000",
-        "SecondaryText": "a7a7a7",
-        "AccentText": "ffb734",
-        "ApproximateSignText": "8c8c8c",
-        "ApproximateExpressionText": "8c8c8c",
+        "Main": {
+            "PrimaryText": "000000",
+            "SecondaryText": "a7a7a7",
+            "AccentText": "ffb734",
+            "ApproximateSignText": "8c8c8c",
+            "ApproximateExpressionText": "8c8c8c"
+        },
         "Background": {
             "Hard": "ffffff",
             "Apps": "f7f9fa",
             "AppsSecondary": "e0e6ed"
         },
         "Toolbar": {
-            "": "ffb734",
+            "Main": "ffb734",
             "Text": "ffffff"
         },
         "ExpressionInput": {
@@ -25,7 +28,7 @@
             "SecondaryLine": "f5f5f5"
         },
         "Battery": {
-            "": "ffffff",
+            "Main": "ffffff",
             "InCharge": "ffcc7b",
             "Low": "f30211"
         },
@@ -34,7 +37,7 @@
             "Background": "d9d9d9"
         },
         "Control": {
-            "": "ffb734",
+            "Main": "ffb734",
             "Enabled": "ffb734",
             "Disabled": "a7a7a7"
         },
