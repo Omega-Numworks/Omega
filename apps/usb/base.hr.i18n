@@ -1,0 +1,7 @@
+USBConnected = "KALKULATOR JE SPOJEM"
+ConnectedMessage1 = "Kako bi ste prenijeli podatke,"
+ConnectedMessage2 = "odite na našu stranicu preko svoga računala"
+ConnectedMessage3 = "workshop.numworks.com"
+ConnectedMessage4 = "Pritisnite BACK tipku na svome"
+ConnectedMessage5 = "kalkulatoru ili isključite kabel"
+ConnectedMessage6 = "kako bi ste odspojili kalkulator."

@@ -1,0 +1,4 @@
+Apps = "Aplikacije"
+AppsCapital = "OMEGA"
+ForbidenAppInExamMode1 = "Ova aplikacija je"
+ForbidenAppInExamMode2 = "zabranjena u ispitnome načinu"
