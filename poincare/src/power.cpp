@@ -1,4 +1,5 @@
 #include <poincare/power.h>
+#include <poincare/absolute_value.h>
 #include <poincare/addition.h>
 #include <poincare/arithmetic.h>
 #include <poincare/binomial_coefficient.h>
@@ -50,6 +51,9 @@ ExpressionNode::Sign PowerNode::sign(Context * context) const {
         return Sign::Negative;
       }
     }
+  }
+  if (childAtIndex(0)->sign(context) == Sign::Unknown && childAtIndex(1)->sign(context) == Sign::Positive) {
+    return Sign::Positive;
   }
   return Sign::Unknown;
 }
@@ -545,6 +549,31 @@ Expression Power::shallowReduce(ExpressionNode::ReductionContext reductionContex
       Expression result = Rational::Builder(1);
       replaceWithInPlace(result);
       return result;
+    }
+  }
+
+  if (indexType == ExpressionNode::Type::Rational && index.convert<Rational>().signedIntegerNumerator().isOne() && baseType == ExpressionNode::Type::Power ) {
+    Integer nth = index.convert<Rational>().integerDenominator();
+    Expression basePower = base.convert<Power>().childAtIndex(1);
+    if (basePower.type() == ExpressionNode::Type::Rational && basePower.convert<Rational>().integerDenominator().isOne()) {
+      Integer basePowerIndex = basePower.convert<Rational>().signedIntegerNumerator();
+      if(nth == basePowerIndex) {
+        Expression poweredValue = base.convert<Power>().childAtIndex(0);
+        ExpressionNode::Sign sign = poweredValue.sign(reductionContext.context());
+        if (nth.isEven()) {
+          if (sign == ExpressionNode::Sign::Positive) {
+            replaceWithInPlace(poweredValue);
+            return poweredValue;
+          } else {
+            Expression result = AbsoluteValue::Builder(poweredValue);
+            replaceWithInPlace(result);
+            return result;
+          }
+        } else {
+          replaceWithInPlace(poweredValue);
+          return poweredValue;
+        }
+      }
     }
   }
 
