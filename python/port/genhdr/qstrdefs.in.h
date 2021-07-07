@@ -547,3 +547,12 @@ Q(username)
 Q(rename)
 Q(listdir)
 
+// sys QSTRs
+Q(sys)
+Q(info)
+Q(implementation)
+Q(byteorder)
+Q(exit)
+Q(modules)
+Q(print_exception)
+Q(version_info)
