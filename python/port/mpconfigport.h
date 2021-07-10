@@ -55,7 +55,7 @@
 #define MICROPY_PY_ASYNC_AWAIT (0)
 
 // Whether to support bytearray object
-#define MICROPY_PY_BUILTINS_BYTEARRAY (0)
+#define MICROPY_PY_BUILTINS_BYTEARRAY (1)
 
 // Whether to support frozenset object
 #define MICROPY_PY_BUILTINS_FROZENSET (1)
@@ -111,9 +111,20 @@
 // Function to seed URANDOM with on init
 #define MICROPY_PY_URANDOM_SEED_INIT_FUNC micropython_port_random()
 
+
+#if defined(DEVICE_N0110)
+
+#define MICROPY_PERSISTENT_CODE_LOAD (1)
+#define MICROPY_EMIT_THUMB (1)
+#define MICROPY_MAKE_POINTER_CALLABLE(p) ((void*)((mp_uint_t)(p) | 1))
+
+#else
+
 // Make a pointer to RAM callable (eg set lower bit for Thumb code)
 // (This scheme won't work if we want to mix Thumb and normal ARM code.)
 #define MICROPY_MAKE_POINTER_CALLABLE(p) (p)
+
+#endif
 
 #define MICROPY_VM_HOOK_LOOP micropython_port_vm_hook_loop();
 

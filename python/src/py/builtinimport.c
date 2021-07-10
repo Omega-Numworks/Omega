@@ -213,7 +213,7 @@ STATIC void do_load(mp_obj_t module_obj, vstr_t *file) {
 
     // If we support loading .mpy files then check if the file extension is of
     // the correct format and, if so, load and execute the file.
-    #if MICROPY_HAS_FILE_READER && MICROPY_PERSISTENT_CODE_LOAD
+    #if MICROPY_PERSISTENT_CODE_LOAD
     if (file_str[file->len - 3] == 'm') {
         mp_raw_code_t *raw_code = mp_raw_code_load_file(file_str);
         do_execute_raw_code(module_obj, raw_code, file_str);

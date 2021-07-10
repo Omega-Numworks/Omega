@@ -7,6 +7,10 @@
 #include <string.h>
 #include <setjmp.h>
 
+#if defined(DEVICE_N0110)
+#include "../../apps/external/archive.h"
+#endif
+
 #ifdef __EMSCRIPTEN__
 #include <emscripten.h>
 
@@ -51,6 +55,7 @@ extern "C" {
 #include "py/compile.h"
 #include "py/gc.h"
 #include "py/lexer.h"
+#include "py/persistentcode.h"
 #include "py/mperrno.h"
 #include "py/mphal.h"
 #include "py/nlr.h"
@@ -364,6 +369,21 @@ mp_import_stat_t mp_import_stat(const char *path) {
   if (sScriptProvider && sScriptProvider->contentOfScript(path, false)) {
     return MP_IMPORT_STAT_FILE;
   }
+  
+  #if MICROPY_PERSISTENT_CODE_LOAD
+  #if MICROPY_PERSISTENT_CODE_LOAD
+  
+  if (path[strlen(path) - 3] == 'm') {
+    // We got a mpy file right there.
+    if (External::Archive::indexFromName(path) != -1) {
+      return MP_IMPORT_STAT_FILE;
+    }
+    
+  }
+  
+  #endif
+  #endif
+  
   return MP_IMPORT_STAT_NO_EXIST;
 }
 
@@ -376,4 +396,22 @@ const char * mp_hal_input(const char * prompt) {
   assert(sCurrentExecutionEnvironment != nullptr);
   return sCurrentExecutionEnvironment->inputText(prompt);
 }
+
+#if MICROPY_PERSISTENT_CODE_LOAD
+
+mp_raw_code_t *mp_raw_code_load_file(const char *filename) {
+  
+  #if defined(DEVICE_N0110)
+  External::Archive::File f;
+  if (External::Archive::fileAtIndex(External::Archive::indexFromName(filename), f)) {
+    return mp_raw_code_load_mem(f.data, f.dataLength);
+  }
+  #endif
+  
+  mp_raise_OSError(MP_ENOENT);
+  
+  return nullptr;
+}
+
+#endif
 

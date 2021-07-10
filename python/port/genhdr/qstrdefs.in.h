@@ -547,3 +547,13 @@ Q(username)
 Q(rename)
 Q(listdir)
 
+Q(uint)
+Q(ptr)
+Q(ptr8)
+Q(ptr16)
+Q(ptr32)
+Q(native)
+Q(viper)
+Q(None)
+Q(ViperTypeError)
+
