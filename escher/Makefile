@@ -8,12 +8,26 @@ $(eval $(call rule_for, \
   $$(PYTHON) themes/themes_manager.py $(THEME_REPO) $(THEME_NAME) $$@ $(BUILD_DIR)/, \
   global \
 ))
+$(eval $(call rule_for, \
+  THEME, \
+  escher/src/palette.cpp, \
+  $(addprefix themes/themes/local/, $(addsuffix .json, $(THEME_NAME))), \
+  $$(PYTHON) themes/themes_manager.py --cpp $(THEME_REPO) $(THEME_NAME) $$@ $(BUILD_DIR)/, \
+  global \
+))
 else
 $(eval $(call rule_for, \
   THEME, \
   escher/palette.h, \
   themes/themes/git/.empty-folder, \
   $$(PYTHON) themes/themes_manager.py $(THEME_REPO) $(THEME_NAME) $$@ $(BUILD_DIR)/, \
+  global \
+))
+$(eval $(call rule_for, \
+  THEME, \
+  escher/src/palette.cpp, \
+  themes/themes/git/.empty-folder, \
+  $$(PYTHON) themes/themes_manager.py --cpp $(THEME_REPO) $(THEME_NAME) $$@ $(BUILD_DIR)/, \
   global \
 ))
 endif

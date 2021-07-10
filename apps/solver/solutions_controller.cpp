@@ -17,7 +17,7 @@ using namespace Shared;
 
 namespace Solver {
 
-constexpr KDColor SolutionsController::ContentView::k_backgroundColor;
+const KDColor SolutionsController::ContentView::k_backgroundColor = Palette::BackgroundAppsSecondary;
 
 SolutionsController::ContentView::ContentView(SolutionsController * controller) :
   m_warningMessageView0(KDFont::SmallFont, I18n::Message::Default, 0.5f, 0.5f, KDColorBlack, k_backgroundColor),

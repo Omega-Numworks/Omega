@@ -54,7 +54,8 @@
             "Keyword": "ff000c",
             "Operator": "d73a49",
             "String": "032f62",
-            "GutterViewBackground": "E4E6E7"
+            "GutterViewBackground": "E4E6E7",
+            "AutocompleteColor": "c6c6c6"
         },
         "Probability": {
             "Curve": "00857f",

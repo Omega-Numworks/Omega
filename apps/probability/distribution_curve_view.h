@@ -30,7 +30,7 @@ protected:
 private:
   static float EvaluateAtAbscissa(float abscissa, void * model, void * context);
   static Poincare::Coordinate2D<float> EvaluateXYAtAbscissa(float abscissa, void * model, void * context);
-  static constexpr KDColor k_backgroundColor = Palette::BackgroundApps;
+  static const KDColor k_backgroundColor;
   void drawStandardNormal(KDContext * ctx, KDRect rect, float colorLowerBound, float colorUpperBound) const;
   char m_labels[k_maxNumberOfXLabels][k_labelBufferMaxSize];
   Distribution * m_distribution;

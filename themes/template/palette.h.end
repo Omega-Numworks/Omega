@@ -1,0 +1,41 @@
+
+  const static KDColor YellowDark;
+  const static KDColor YellowLight;
+  const static KDColor PurpleBright;
+  const static KDColor PurpleDark;
+  const static KDColor GrayWhite;
+  const static KDColor GrayBright;
+  const static KDColor GrayMiddle;
+  const static KDColor GrayDark;
+  const static KDColor GrayVeryDark;
+  const static KDColor Select;
+  const static KDColor SelectDark;
+  const static KDColor WallScreen;
+  const static KDColor WallScreenDark;
+  const static KDColor SubTab;
+  const static KDColor LowBattery;
+  const static KDColor Red;
+  const static KDColor RedLight;
+  const static KDColor Magenta;
+  const static KDColor Turquoise;
+  const static KDColor Pink;
+  const static KDColor Blue;
+  const static KDColor BlueLight;
+  const static KDColor Orange;
+  const static KDColor Green;
+  const static KDColor GreenLight;
+  const static KDColor Brown;
+  const static KDColor Purple;
+  const static KDColor BlueishGrey;
+  const static KDColor Cyan;
+
+  const static KDColor DataColor[8];
+  const static KDColor DataColorLight[4];
+  const static KDColor AtomColor[11];
+
+  const static size_t numberOfDataColors() { return sizeof(DataColor)/sizeof(KDColor); }
+  const static size_t numberOfLightDataColors() { return sizeof(DataColorLight)/sizeof(KDColor); }
+  static KDColor nextDataColor(int * colorIndex);
+};
+
+#endif

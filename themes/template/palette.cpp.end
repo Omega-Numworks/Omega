@@ -1,0 +1,46 @@
+
+const KDColor Palette::YellowDark = KDColor::RGB24(0xffb734);
+const KDColor Palette::YellowLight = KDColor::RGB24(0xffcc7b);
+const KDColor Palette::PurpleBright = KDColor::RGB24(0x656975);
+const KDColor Palette::PurpleDark = KDColor::RGB24(0x414147);
+const KDColor Palette::GrayWhite = KDColor::RGB24(0xf5f5f5);
+const KDColor Palette::GrayBright = KDColor::RGB24(0xececec);
+const KDColor Palette::GrayMiddle = KDColor::RGB24(0xd9d9d9);
+const KDColor Palette::GrayDark = KDColor::RGB24(0xa7a7a7);
+const KDColor Palette::GrayVeryDark = KDColor::RGB24(0x8c8c8c);
+const KDColor Palette::Select = KDColor::RGB24(0xd4d7e0);
+const KDColor Palette::SelectDark = KDColor::RGB24(0xb0b8d8);
+const KDColor Palette::WallScreen = KDColor::RGB24(0xf7f9fa);
+const KDColor Palette::WallScreenDark = KDColor::RGB24(0xe0e6ed);
+const KDColor Palette::SubTab = KDColor::RGB24(0xb8bbc5);
+const KDColor Palette::LowBattery = KDColor::RGB24(0xf30211);
+const KDColor Palette::Red = KDColor::RGB24(0xff000c);
+const KDColor Palette::RedLight = KDColor::RGB24(0xfe6363);
+const KDColor Palette::Magenta = KDColor::RGB24(0xff0588);
+const KDColor Palette::Turquoise = KDColor::RGB24(0x60c1ec);
+const KDColor Palette::Pink = KDColor::RGB24(0xffabb6);
+const KDColor Palette::Blue = KDColor::RGB24(0x5075f2);
+const KDColor Palette::BlueLight = KDColor::RGB24(0x718fee);
+const KDColor Palette::Orange = KDColor::RGB24(0xfe871f);
+const KDColor Palette::Green = KDColor::RGB24(0x50c102);
+const KDColor Palette::GreenLight = KDColor::RGB24(0x52db8f);
+const KDColor Palette::Brown = KDColor::RGB24(0x8d7350);
+const KDColor Palette::Purple = KDColor::RGB24(0x6e2d79);
+const KDColor Palette::BlueishGrey = KDColor::RGB24(0x919ea4);
+const KDColor Palette::Cyan = KDColorBlue;
+
+const KDColor Palette::DataColor[] = {Red, Blue, Green, YellowDark, Magenta, Turquoise, Pink, Orange};
+const KDColor Palette::DataColorLight[] = {RedLight, BlueLight, GreenLight, YellowLight};
+const KDColor Palette::AtomColor[] = {
+  AtomUnknown, AtomAlkaliMetal, AtomAlkaliEarthMetal, AtomLanthanide, AtomActinide, AtomTransitionMetal,
+  AtomPostTransitionMetal, AtomMetalloid, AtomHalogen, AtomReactiveNonmetal, AtomNobleGas
+};
+
+KDColor Palette::nextDataColor(int * colorIndex) {
+  size_t nbOfColors = numberOfDataColors();
+  assert(*colorIndex < nbOfColors);
+  KDColor c = DataColor[*colorIndex];
+  *colorIndex = (*colorIndex + 1) % nbOfColors;
+  return c;
+}
+

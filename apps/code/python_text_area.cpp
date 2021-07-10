@@ -13,15 +13,14 @@ extern "C" {
 
 namespace Code {
 
-constexpr KDColor CommentColor = Palette::CodeComment;
-constexpr KDColor NumberColor =  Palette::CodeNumber;
-constexpr KDColor KeywordColor = Palette::CodeKeyword;
-// constexpr KDColor BuiltinColor = KDColor::RGB24(0x0086B3);
-constexpr KDColor OperatorColor = Palette::CodeOperator;
-constexpr KDColor StringColor = Palette::CodeString;
-constexpr KDColor BackgroundColor = Palette::CodeBackground;
-constexpr KDColor HighlightColor = Palette::CodeBackgroundSelected;
-constexpr KDColor AutocompleteColor = KDColor::RGB24(0xC6C6C6); // TODO Palette change
+const KDColor CommentColor = Palette::CodeComment;
+const KDColor NumberColor =  Palette::CodeNumber;
+const KDColor KeywordColor = Palette::CodeKeyword;
+const KDColor OperatorColor = Palette::CodeOperator;
+const KDColor StringColor = Palette::CodeString;
+const KDColor BackgroundColor = Palette::CodeBackground;
+const KDColor HighlightColor = Palette::CodeBackgroundSelected;
+const KDColor AutocompleteColor = Palette::CodeAutocompleteColor;
 
 static inline KDColor TokenColor(mp_token_kind_t tokenKind) {
   if (tokenKind == MP_TOKEN_STRING) {

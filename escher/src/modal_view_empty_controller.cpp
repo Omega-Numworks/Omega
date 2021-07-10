@@ -2,7 +2,7 @@
 #include <apps/i18n.h>
 #include <assert.h>
 
-constexpr KDColor ModalViewEmptyController::ModalViewEmptyView::k_backgroundColor;
+const KDColor ModalViewEmptyController::ModalViewEmptyView::k_backgroundColor = Palette::WallScreen;
 
 // ModalViewEmptyController::ModalViewEmptyView
 void ModalViewEmptyController::ModalViewEmptyView::initMessageViews() {

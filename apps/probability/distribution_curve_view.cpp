@@ -6,7 +6,7 @@ using namespace Shared;
 
 namespace Probability {
 
-constexpr KDColor DistributionCurveView::k_backgroundColor;
+const KDColor DistributionCurveView::k_backgroundColor = Palette::BackgroundApps;
 
 void DistributionCurveView::reload() {
   CurveView::reload();
