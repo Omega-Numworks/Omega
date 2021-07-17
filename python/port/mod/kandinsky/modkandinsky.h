@@ -8,3 +8,4 @@ mp_obj_t modkandinsky_draw_line(size_t n_args, const mp_obj_t *args);
 mp_obj_t modkandinsky_fill_rect(size_t n_args, const mp_obj_t *args);
 mp_obj_t modkandinsky_wait_vblank();
 mp_obj_t modkandinsky_get_keys();
+mp_obj_t modkandinsky_get_palette();
