@@ -427,22 +427,68 @@ void initPanel() {
   send_command(Command::SleepOut);
   Timing::msleep(5);
 
+  uint32_t panelId = panelIdentifier();
+
   send_command(Command::PixelFormatSet, 0x05);
   send_command(Command::TearingEffectLineOn, 0x00);
-  send_command(Command::FrameRateControl, 0x1E); // 40 Hz frame rate
+
+  if (panelId == 0x4E4102 || panelId == 0x4E5401) {
+    // These panels need additionnal configuration
+    static const uint8_t porch[] = { 0x0C, 0x0C, 0x00, 0x33, 0x33 };
+    send_long_command(Command::PorchSetting, 5, porch);
+
+    send_command(Command::GateControl, 0x35);
+    send_command(Command::VCOMSetting, 0x3C);
+    send_command(Command::LMCControl, 0x2C);
+    send_command(Command::VDVVRHEnable, 0x1);
+    send_command(Command::VRHSet, 0x10);
+    send_command(Command::VDVSet, 0x20);
+    send_command(Command::PowerControl1, 0xA4, 0xA1);
+  }
+
+  if (panelId == 0x4E4101 || panelId == 0x4E4102 || panelId == 0x4E4801) {
+    // These pannels accept a lower framerate
+    send_command(Command::FrameRateControl, 0x1E); // 40Hz
+  } else {
+    send_command(Command::FrameRateControl, 0x05); // 90Hz
+  }
 
   // Calibration
-  const uint8_t * gammaCalibration = nullptr;
-  uint32_t panelId = panelIdentifier();
-  if (panelId == 0x4E4101 || panelId == 0x4E4801) {
-    /* Don't forget the "static" qualifier, otherwise this array can be deleted
-     * before reaching send_long_command. */
-    static const uint8_t calibration[] = {0xA2, 0xA, 0x11, 0xA, 0xC, 0x1A, 0x34, 0x22, 0x4D, 0x28, 0x15, 0x13, 0x29, 0x2D};
-    gammaCalibration = calibration;
+  const uint8_t * posGammaCalibration = nullptr;
+  const uint8_t * negGammaCalibration = nullptr;
+
+  // TODO: Cleanup ?
+  switch(panelId) {
+    case 0x4E4101:
+    case 0x4E4801:
+      static const uint8_t calibration_4E4101[] = {0xa2, 0xa, 0x11, 0xa, 0xc, 0x1a, 0x34, 0x22, 0x4d, 0x28, 0x15, 0x13, 0x29, 0x2d};
+      posGammaCalibration = calibration_4E4101;
+      negGammaCalibration = calibration_4E4101;
+      break;
+    case 0x4E4102:
+      static const uint8_t calibration_4E4102[] = {0xf0, 0x9, 0xf, 0x8, 0x7, 0x3, 0x28, 0x11, 0x3c, 0x17, 0x12, 0x11, 0x28, 0x2d};
+      posGammaCalibration = calibration_4E4102;
+      negGammaCalibration = calibration_4E4102;
+      break;
+    case 0x4E4601:
+      static const uint8_t calibration_4E4601[] = {0xc4, 0xc, 0x13, 0xc, 0xe, 0x3c, 0x36, 0x44, 0x4f, 0x3a, 0x17, 0x15, 0x2b, 0x2f};
+      posGammaCalibration = calibration_4E4601;
+      negGammaCalibration = calibration_4E4601;
+      break;
+    case 0x4E5401:
+      static const uint8_t pos_calibration_4E5401[] = {0xf0, 0xd, 0x12, 0x9, 0x8, 0x14, 0x2d, 0x22, 0x43, 0x38, 0x17, 0x19, 0x2c, 0x30};
+      static const uint8_t neg_calibration_4E5401[] = {0xf0, 0x9, 0xd, 0xa, 0x9, 0x5, 0x29, 0x43, 0x40, 0x39, 0x18, 0x16, 0x2e, 0x2e};
+      posGammaCalibration = pos_calibration_4E5401;
+      negGammaCalibration = neg_calibration_4E5401;
+      break;
+    default:
+      break;
+
   }
-  if (gammaCalibration != nullptr) {
-    send_long_command(Command::PositiveVoltageGammaControl, 14, gammaCalibration);
-    send_long_command(Command::NegativeVoltageGammaControl, 14, gammaCalibration);
+
+  if (posGammaCalibration != nullptr && negGammaCalibration != nullptr) {
+    send_long_command(Command::PositiveVoltageGammaControl, 14, posGammaCalibration);
+    send_long_command(Command::NegativeVoltageGammaControl, 14, negGammaCalibration);
   }
 
   if (Config::DisplayInversion) {
