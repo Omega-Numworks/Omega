@@ -9,6 +9,7 @@ ion_device_src += $(addprefix ion/src/device/n0110/drivers/, \
 
 ion_device_src += $(addprefix ion/src/device/n0115/drivers/, \
   external_flash.cpp \
+  fccid.cpp \
 )
 
 ion_device_src += $(addprefix ion/src/device/n0115/boot/, \
