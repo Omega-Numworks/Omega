@@ -1,0 +1,5 @@
+TOOLCHAIN ?= arm-gcc-m7f
+ION_KEYBOARD_LAYOUT = layout_B3
+PCB_LATEST = 504 # PCB version 5.04
+
+ION_ADDITIONAL_DEVICE_SFLAGS = -Iion/src/device/n0110
