@@ -24,6 +24,9 @@ endif
 ifeq (${MODEL},n0115)
   apps_list = ${EPSILON_APPS}
 endif
+ifeq (${MODEL},n0115-bootloader)
+  apps_list = ${EPSILON_APPS}
+endif
 
 ifdef FORCE_EXTERNAL
   apps_list = ${EPSILON_APPS}
