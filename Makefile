@@ -12,14 +12,17 @@ include build/toolchain.$(TOOLCHAIN).mak
 include build/variants.mak
 include build/helpers.mk
 
+ifeq (${MODEL},n0100)
+  apps_list = $(foreach i, ${EPSILON_APPS}, $(if $(filter external, $(i)),,$(i)))
+endif
 ifeq (${MODEL},n0110)
   apps_list = ${EPSILON_APPS}
-else
-  ifeq (${MODEL},bootloader)
-    apps_list = ${EPSILON_APPS}
-  else
-    apps_list = $(foreach i, ${EPSILON_APPS}, $(if $(filter external, $(i)),,$(i)))
-  endif
+endif
+ifeq (${MODEL},n0110-bootloader)
+  apps_list = ${EPSILON_APPS}
+endif
+ifeq (${MODEL},n0115)
+  apps_list = ${EPSILON_APPS}
 endif
 
 ifdef FORCE_EXTERNAL

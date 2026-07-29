@@ -11,7 +11,7 @@
 
 MEMORY {
   SRAM (rw)  : ORIGIN = 0x20000000, LENGTH = 256K
-  FLASH (rx) : ORIGIN = 0x90000000, LENGTH = 4M
+  FLASH (rx) : ORIGIN = 0x90400000, LENGTH = 4M
   /*
   ITCM (rwx) : ORIGIN = 0x00000000, LENGTH = 16K
   DTCM (rwx) : ORIGIN = 0x20000000, LENGTH = 64K
@@ -25,4 +25,4 @@ FIRST_FLASH_SECTOR_SIZE = 4K;
 SIGNED_PAYLOAD_LENGTH = 8;
 USERLAND_OFFSET = 64K;
 
-INCLUDE ion/src/device/bootloader/bootloader_common.ld;
+INCLUDE ion/src/device/n0110-bootloader/bootloader_common.ld;

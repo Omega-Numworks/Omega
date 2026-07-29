@@ -50,8 +50,8 @@ ifeq ($(MODEL),n0110)
   ion_device_dfu_src += ion/src/device/n0110/drivers/reset.cpp
   ion_device_dfu_src += ion/src/device/n0110/drivers/usb.cpp
 endif
-ifeq ($(MODEL),bootloader)
-  ion_device_dfu_src += ion/src/device/bootloader/drivers/board.cpp
+ifeq ($(MODEL),n0110-bootloader)
+  ion_device_dfu_src += ion/src/device/n0110-bootloader/drivers/board.cpp
   ion_device_dfu_src += ion/src/device/n0110/drivers/cache.cpp
   ion_device_dfu_src += ion/src/device/n0110/drivers/external_flash.cpp
   ion_device_dfu_src += ion/src/device/n0110/drivers/external_flash_gpio.cpp
