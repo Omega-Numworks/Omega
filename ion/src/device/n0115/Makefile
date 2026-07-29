@@ -1,6 +1,7 @@
 ion_device_src += $(addprefix ion/src/device/n0110/drivers/, \
   board.cpp \
   cache.cpp \
+  external_flash.cpp \
   led.cpp \
   power.cpp \
   reset.cpp \
@@ -8,7 +9,7 @@ ion_device_src += $(addprefix ion/src/device/n0110/drivers/, \
 )
 
 ion_device_src += $(addprefix ion/src/device/n0115/drivers/, \
-  external_flash.cpp \
+  external_flash_gpio.cpp \
   fccid.cpp \
 )
 

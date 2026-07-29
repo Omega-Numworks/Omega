@@ -303,12 +303,6 @@ static void send_command_full(QUADSPI::CCR::FunctionalMode functionalMode, Opera
   }
 }
 
-static void initGPIO() {
-  for(const AFGPIOPin & p : Config::Pins) {
-    p.init();
-  }
-}
-
 static void initQSPI() {
   // Enable QUADSPI AHB3 peripheral clock
   RCC.AHB3ENR()->setQSPIEN(true);
@@ -345,6 +339,8 @@ static void initChip() {
   set_as_memory_mapped();
 }
 
+void initGPIO();
+
 void init() {
   if (Config::NumberOfSectors == 0) {
     return;
@@ -352,14 +348,6 @@ void init() {
   initGPIO();
   initQSPI();
   initChip();
-}
-
-static void shutdownGPIO() {
-  for(const AFGPIOPin & p : Config::Pins) {
-    p.group().OSPEEDR()->setOutputSpeed(p.pin(), GPIO::OSPEEDR::OutputSpeed::Low);
-    p.group().MODER()->setMode(p.pin(), GPIO::MODER::Mode::Analog);
-    p.group().PUPDR()->setPull(p.pin(), GPIO::PUPDR::Pull::None);
-  }
 }
 
 static void shutdownChip() {
@@ -382,6 +370,8 @@ static void shutdownQSPI() {
 
   RCC.AHB3ENR()->setQSPIEN(false); // TODO: move in Device::shutdownClocks
 }
+
+void shutdownGPIO();
 
 void shutdown() {
   if (Config::NumberOfSectors == 0) {
