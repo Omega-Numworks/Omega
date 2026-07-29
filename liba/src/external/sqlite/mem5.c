@@ -561,13 +561,13 @@ void sqlite3Memsys5Dump(const char *zFilename){
 */
 const sqlite3_mem_methods *sqlite3MemGetMemsys5(void){
   static const sqlite3_mem_methods memsys5Methods = {
-     memsys5Malloc,
-     memsys5Free,
-     memsys5Realloc,
-     memsys5Size,
-     memsys5Roundup,
-     memsys5Init,
-     memsys5Shutdown,
+     (sqlite3_mem_methods) memsys5Malloc,
+     (sqlite3_mem_methods) memsys5Free,
+     (sqlite3_mem_methods) memsys5Realloc,
+     (sqlite3_mem_methods) memsys5Size,
+     (sqlite3_mem_methods) memsys5Roundup,
+     (sqlite3_mem_methods) memsys5Init,
+     (sqlite3_mem_methods) memsys5Shutdown,
      0
   };
   return &memsys5Methods;

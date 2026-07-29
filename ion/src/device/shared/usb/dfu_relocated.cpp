@@ -65,7 +65,7 @@ void DFU(bool exitWithKeyboard, int slot) {
   /* 5- Jump to DFU bootloader code. We made sure in the linker script that the
    * first function we want to call is at the beginning of the DFU code. */
 
-  PollFunctionPointer dfu_bootloader_entry = reinterpret_cast<PollFunctionPointer>(dfu_bootloader_ram_start);
+  volatile PollFunctionPointer dfu_bootloader_entry = reinterpret_cast<PollFunctionPointer>(dfu_bootloader_ram_start);
 
   /* To have the right debug symbols for the reallocated code, break here and:
    *  - Get the address of the new .text section
