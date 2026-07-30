@@ -11,6 +11,7 @@ liba_src += $(addprefix liba/src/, \
   fpclassify.c \
   fpclassifyf.c \
   ieee754.c \
+  itoa.c \
   malloc.c \
   memcmp.c \
   memcpy.c \

@@ -11,6 +11,8 @@ void * malloc(size_t size);
 void * realloc(void *ptr, size_t size);
 void * calloc(size_t count, size_t size);
 
+char * itoa(int value, char *str, int base);
+
 void abort(void) __attribute__((noreturn));
 
 int abs(int n);
