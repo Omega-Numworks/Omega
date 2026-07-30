@@ -8,11 +8,11 @@ extern "C" void jump_to_firmware(const uint32_t* stackPtr, const void(*startPtr)
 namespace Bootloader {
 
 const Slot Slot::A() {
-  return Slot(0x90000000);
+  return Slot(0x90000000, SlotID::A);
 }
 
 const Slot Slot::B() {
-  return Slot(0x90400000);
+  return Slot(0x90400000, SlotID::B);
 }
 
 const KernelHeader* Slot::kernelHeader() const {
@@ -27,17 +27,17 @@ const UserlandHeader* Slot::userland2Header() const {
 	return m_userland2Header;
 }
 
-[[ noreturn ]] void Slot::boot(const char* Slot) const {
+[[ noreturn ]] void Slot::boot() const {
 	//protection mechanism against bootloader update introduced in E20
 	//check if the slot use Userland2Header
 	if (m_userland2Header->isValid()) {
-		if (Slot == "A") {
+		if (kernelHeader() == (void*)0x90000000) {
 			//check if 0x90010000 = 0xFFFFFFFF
 			if (*(uint32_t*)0x90010000 != 0xFFFFFFFF) {
 				Ion::Device::ExternalFlash::EraseSector(9);
 			}
 		}
-		else if (Slot == "B") {
+		else if (kernelHeader() == (void*)0x90400000) {
 			//check if 0x90410000 = 0xFFFFFFFF
 			if (*(uint32_t*)0x90410000 != 0xFFFFFFFF) {
 				Ion::Device::ExternalFlash::EraseSector(73);
