@@ -429,13 +429,13 @@ void initPanel() {
 
   uint32_t panelId = panelIdentifier();
 
-  send_command(Command::PixelFormatSet, 0x05);
+  send_command(Command::PixelFormatSet, 0x55);
   send_command(Command::TearingEffectLineOn, 0x00);
 
   if (panelId == 0x4E4102 || panelId == 0x4E5401) {
     // These panels need additionnal configuration
-    static const uint8_t porch[] = { 0x0C, 0x0C, 0x00, 0x33, 0x33 };
-    send_long_command(Command::PorchSetting, 5, porch);
+    static const uint8_t porch_config[] = { 0x0C, 0x0C, 0x00, 0x33, 0x33 };
+    send_long_command(Command::PorchSetting, 5, porch_config);
 
     send_command(Command::GateControl, 0x35);
     send_command(Command::VCOMSetting, 0x3C);
@@ -446,7 +446,7 @@ void initPanel() {
     send_command(Command::PowerControl1, 0xA4, 0xA1);
   }
 
-  if (panelId == 0x4E4101 || panelId == 0x4E4102 || panelId == 0x4E4801) {
+  if (panelId == 0x4E4101 || panelId == 0x4E4105 || panelId == 0x4E4801) {
     // These pannels accept a lower framerate
     send_command(Command::FrameRateControl, 0x1E); // 40Hz
   } else {
@@ -460,6 +460,7 @@ void initPanel() {
   // TODO: Cleanup ?
   switch(panelId) {
     case 0x4E4101:
+    case 0x4E4105:
     case 0x4E4801:
       static const uint8_t calibration_4E4101[] = {0xa2, 0xa, 0x11, 0xa, 0xc, 0x1a, 0x34, 0x22, 0x4d, 0x28, 0x15, 0x13, 0x29, 0x2d};
       posGammaCalibration = calibration_4E4101;
@@ -483,7 +484,6 @@ void initPanel() {
       break;
     default:
       break;
-
   }
 
   if (posGammaCalibration != nullptr && negGammaCalibration != nullptr) {
