@@ -70,7 +70,7 @@ ifeq ($(MODEL),n0115-bootloader)
   ion_device_dfu_src += ion/src/device/n0110-bootloader/drivers/board.cpp
   ion_device_dfu_src += ion/src/device/n0110/drivers/cache.cpp
   ion_device_dfu_src += ion/src/device/n0110/drivers/external_flash.cpp
-  ion_device_dfu_src += ion/src/device/n0110/drivers/external_flash_gpio.cpp
+  ion_device_dfu_src += ion/src/device/n0115/drivers/external_flash_gpio.cpp
   ion_device_dfu_src += ion/src/device/n0110/drivers/reset.cpp
   ion_device_dfu_src += ion/src/device/n0110/drivers/usb.cpp
 endif
