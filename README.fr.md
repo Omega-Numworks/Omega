@@ -11,6 +11,11 @@
 > Don't understand french ? speak english ? here's the [english README](./README.md) !
 
 > [!WARNING]
+> *Mise à jour 31-07-2026*: Ceci est la branche **experimentale** d'Omega. Son but et de contenir différentes modifications apportées par les contributeurs originaux, principalement sur le code bas-niveau (comme porter Omega sur des modèles plus récents de calculatrices Numworks). Si vous souhaitez ajouter de vrai nouvelles fonctionnalités, considérer l'option de contribuer à [Upsilon ⭐️](https://github.com/UpsilonNumworks/Upsilon/).
+>
+> Le développement d'Omega est toujours en pause pour une durée indéterminée.
+
+> [!WARNING]
 > *Mise à jour 02-02-2024*: Le code source d'Omega est en pause jusqu'à ce qu'une nouvelle version de Phi sorte. Pendant ce temps, les contributions ne seront pas acceptées/examinées. Le projet est donc marqué en lecture seule pour éviter toute confusion.
 >
 > - Consultez le [Projet Upsilon ⭐️](https://github.com/UpsilonNumworks/Upsilon/) pour une version maintenue d'Omega;

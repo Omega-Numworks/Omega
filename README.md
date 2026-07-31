@@ -11,6 +11,11 @@
 > Vous ne comprenez pas l'anglais ? vous êtes francophone ? Regardez le [*LISEZ-MOI* français](./README.fr.md) !
 
 > [!WARNING]
+> *Update 31-07-2026*: This is the **experimental** branch of Omega. Its goal is to contain various modifications made by the original contributors, mostly on low-level stuff like porting Omega to newer Numworks devices. If you want to add real features, please consider contributing to [Upsilon ⭐️](https://github.com/UpsilonNumworks/Upsilon/).
+>
+> Development of Omega is still on hold for an indefinite periode of time.
+
+> [!WARNING]
 > *Update 02-02-2024*: The source code of Omega is on hold until a new version of Phi is released. Meanwhile, contributions will not be accepted/reviewed, so the project is marked as read-only to avoid confusion.
 >
 > - Check the [Upsilon Project ⭐️](https://github.com/UpsilonNumworks/Upsilon/) for a maintained version of Omega;
