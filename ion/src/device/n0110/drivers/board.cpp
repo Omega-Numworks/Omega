@@ -10,12 +10,6 @@
 typedef void(*ISR)(void);
 extern ISR InitialisationVector[];
 
-// Public Ion methods
-
-const char * Ion::fccId() {
-  return "2ALWP-N0110";
-}
-
 // Private Ion::Device methods
 
 namespace Ion {

@@ -39,29 +39,29 @@ __attribute__((noreturn)) void Boot::boot() {
   } else if (!Slot::A().kernelHeader()->isValid()) {
     // If slot A is invalid and B valid, boot B
     setMode(BootMode::SlotB);
-    Slot::B().boot("B");
+    Slot::B().boot();
   } else if (!Slot::B().kernelHeader()->isValid()) {
     // If slot B is invalid and A valid, boot A
     setMode(BootMode::SlotA);
-    Slot::A().boot("A");
+    Slot::A().boot();
   } else {
       const char* version = Bootloader::Slot::A().kernelHeader()->version();
       bool isExam = Bootloader::ExamMode::SlotsExamMode::FetchSlotExamMode(version, "A") > 0;
       if (isExam) {
-          Bootloader::Slot::A().boot("A");
+          Bootloader::Slot::A().boot();
       }
 
       version = Bootloader::Slot::B().kernelHeader()->version();
       isExam = Bootloader::ExamMode::SlotsExamMode::FetchSlotExamMode(version, "B") > 0;
       if (isExam) {
-          Bootloader::Slot::B().boot("B");
+          Bootloader::Slot::B().boot();
       }
 
     // Both valid, boot the selected one
     if (mode() == BootMode::SlotA) {
-      Slot::A().boot("A");
+      Slot::A().boot();
     } else if (mode() == BootMode::SlotB) {
-      Slot::B().boot("B");
+      Slot::B().boot();
     }
   }
 

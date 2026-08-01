@@ -20,7 +20,7 @@ public:
   const KernelHeader* kernelHeader() const;
   const UserlandHeader* userlandHeader() const;
   const UserlandHeader* userland2Header() const;
-  [[ noreturn ]] void boot(const char* Slot) const;
+  [[ noreturn ]] void boot() const;
 
   static const Slot A();
   static const Slot B();

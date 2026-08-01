@@ -118,12 +118,13 @@ private:
 
 /* W25Q64JV does not implement QPI-4-4-4, so we always send the instructions on
  * one wire only.*/
-static constexpr OperatingModes sOperatingModes100(QUADSPI::CCR::OperatingMode::Single, QUADSPI::CCR::OperatingMode::NoData, QUADSPI::CCR::OperatingMode::NoData);
-static constexpr OperatingModes sOperatingModes101(QUADSPI::CCR::OperatingMode::Single, QUADSPI::CCR::OperatingMode::NoData, QUADSPI::CCR::OperatingMode::Single);
-static constexpr OperatingModes sOperatingModes110(QUADSPI::CCR::OperatingMode::Single, QUADSPI::CCR::OperatingMode::Single, QUADSPI::CCR::OperatingMode::NoData);
-static constexpr OperatingModes sOperatingModes111(QUADSPI::CCR::OperatingMode::Single, QUADSPI::CCR::OperatingMode::Single, QUADSPI::CCR::OperatingMode::Single);
-static constexpr OperatingModes sOperatingModes114(QUADSPI::CCR::OperatingMode::Single, QUADSPI::CCR::OperatingMode::Single, QUADSPI::CCR::OperatingMode::Quad);
-static constexpr OperatingModes sOperatingModes144(QUADSPI::CCR::OperatingMode::Single, QUADSPI::CCR::OperatingMode::Quad, QUADSPI::CCR::OperatingMode::Quad);
+// We martk these as const and not constexpr so that the linker keeps the symbol name so that we can relocate themm in internal flash.
+static const OperatingModes sOperatingModes100(QUADSPI::CCR::OperatingMode::Single, QUADSPI::CCR::OperatingMode::NoData, QUADSPI::CCR::OperatingMode::NoData);
+static const OperatingModes sOperatingModes101(QUADSPI::CCR::OperatingMode::Single, QUADSPI::CCR::OperatingMode::NoData, QUADSPI::CCR::OperatingMode::Single);
+static const OperatingModes sOperatingModes110(QUADSPI::CCR::OperatingMode::Single, QUADSPI::CCR::OperatingMode::Single, QUADSPI::CCR::OperatingMode::NoData);
+static const OperatingModes sOperatingModes111(QUADSPI::CCR::OperatingMode::Single, QUADSPI::CCR::OperatingMode::Single, QUADSPI::CCR::OperatingMode::Single);
+static const OperatingModes sOperatingModes114(QUADSPI::CCR::OperatingMode::Single, QUADSPI::CCR::OperatingMode::Single, QUADSPI::CCR::OperatingMode::Quad);
+static const OperatingModes sOperatingModes144(QUADSPI::CCR::OperatingMode::Single, QUADSPI::CCR::OperatingMode::Quad, QUADSPI::CCR::OperatingMode::Quad);
 
 static QUADSPI::CCR::OperatingMode sOperatingMode = QUADSPI::CCR::OperatingMode::Single;
 
@@ -303,12 +304,6 @@ static void send_command_full(QUADSPI::CCR::FunctionalMode functionalMode, Opera
   }
 }
 
-static void initGPIO() {
-  for(const AFGPIOPin & p : Config::Pins) {
-    p.init();
-  }
-}
-
 static void initQSPI() {
   // Enable QUADSPI AHB3 peripheral clock
   RCC.AHB3ENR()->setQSPIEN(true);
@@ -345,6 +340,8 @@ static void initChip() {
   set_as_memory_mapped();
 }
 
+void initGPIO();
+
 void init() {
   if (Config::NumberOfSectors == 0) {
     return;
@@ -352,14 +349,6 @@ void init() {
   initGPIO();
   initQSPI();
   initChip();
-}
-
-static void shutdownGPIO() {
-  for(const AFGPIOPin & p : Config::Pins) {
-    p.group().OSPEEDR()->setOutputSpeed(p.pin(), GPIO::OSPEEDR::OutputSpeed::Low);
-    p.group().MODER()->setMode(p.pin(), GPIO::MODER::Mode::Analog);
-    p.group().PUPDR()->setPull(p.pin(), GPIO::PUPDR::Pull::None);
-  }
 }
 
 static void shutdownChip() {
@@ -382,6 +371,8 @@ static void shutdownQSPI() {
 
   RCC.AHB3ENR()->setQSPIEN(false); // TODO: move in Device::shutdownClocks
 }
+
+void shutdownGPIO();
 
 void shutdown() {
   if (Config::NumberOfSectors == 0) {
