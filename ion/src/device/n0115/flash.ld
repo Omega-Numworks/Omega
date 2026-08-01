@@ -103,7 +103,7 @@ SECTIONS {
     *(.text._ZN3Ion6Device5Reset17internalFlashJumpEj)
 
     /* Optimization */
-    */libgcc.a:(.text)
+    */libgcc.a:(.text .text*)
   } >INTERNAL_FLASH
 
 
