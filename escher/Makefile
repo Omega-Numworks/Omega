@@ -149,3 +149,6 @@ $(call object_for,$(1)): SFLAGS += $(foreach d,$(sort $(dir $(call object_for,$(
 escher_src += $(2)
 image_list += $(2)
 endef
+
+# This file needs the external icon to display in the home menu
+$(eval $(call depends_on_image,escher/src/background_view.cpp,apps/external/external_icon.png))
