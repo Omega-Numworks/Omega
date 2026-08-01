@@ -42,6 +42,13 @@ ion_device_dfu_src += liba/src/memcpy.c
 ion_device_dfu_src += libaxx/src/cxxabi/pure_virtual.cpp
 ion_device_dfu_src += ion/src/device/shared/usb/boot.cpp
 
+ifeq ($(MODEL),n0100)
+  ion_device_dfu_src += ion/src/device/n0100/drivers/board.cpp
+  ion_device_dfu_src += ion/src/device/n0100/drivers/cache.cpp
+  ion_device_dfu_src += ion/src/device/n0100/drivers/external_flash.cpp
+  ion_device_dfu_src += ion/src/device/n0100/drivers/reset.cpp
+  ion_device_dfu_src += ion/src/device/n0100/drivers/usb.cpp
+endif
 ifeq ($(MODEL),n0110)
   ion_device_dfu_src += ion/src/device/n0110/drivers/board.cpp
   ion_device_dfu_src += ion/src/device/n0110/drivers/cache.cpp
