@@ -10,32 +10,28 @@
 #ifdef __EMSCRIPTEN__
 #include <emscripten.h>
 
-void python_error_start(const char* type) {
-  EM_ASM({
-    Module.___temp_python_error = new Object();
-    Module.___temp_python_error["stacktrace"] = new Array();
-    Module.___temp_python_error["type"] = Module.UTF8ToString($0);
-  }, type);
-}
+/* EM_JS rather than EM_ASM: these are called from runCode, which uses
+ * setjmp/longjmp (nlr_push), and recent Emscripten refuses EM_ASM there. */
+EM_JS(void, python_error_start, (const char* type), {
+  Module.___temp_python_error = new Object();
+  Module.___temp_python_error["stacktrace"] = new Array();
+  Module.___temp_python_error["type"] = UTF8ToString(type);
+});
 
-void python_error_add_trace(const char* file, int line, const char* block) {
-  EM_ASM({
-    var temp_obj = new Object();
-    temp_obj["file"] = Module.UTF8ToString($0);
-    temp_obj["line"] = $1;
-    temp_obj["block"] = Module.UTF8ToString($2);
-    Module.___temp_python_error.stacktrace.push(temp_obj);
-  }, file, line, block);
-}
+EM_JS(void, python_error_add_trace, (const char* file, int line, const char* block), {
+  var temp_obj = new Object();
+  temp_obj["file"] = UTF8ToString(file);
+  temp_obj["line"] = line;
+  temp_obj["block"] = UTF8ToString(block);
+  Module.___temp_python_error.stacktrace.push(temp_obj);
+});
 
-void python_error_end() {
-  EM_ASM({
-    if (typeof Module.onPythonError === "function") {
-      Module.onPythonError(Module.___temp_python_error); 
-    }
-    delete Module.___temp_python_error;
-  });
-}
+EM_JS(void, python_error_end, (), {
+  if (typeof Module.onPythonError === "function") {
+    Module.onPythonError(Module.___temp_python_error);
+  }
+  delete Module.___temp_python_error;
+});
 #endif
 
 

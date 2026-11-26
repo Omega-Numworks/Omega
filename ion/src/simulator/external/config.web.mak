@@ -26,6 +26,7 @@ sdl_src += $(addprefix ion/src/simulator/external/sdl/src/, \
   libm/s_sin.c \
   libm/s_tan.c \
   loadso/dlopen/SDL_sysloadso.c \
+  thread/generic/SDL_sysmutex.c \
   thread/generic/SDL_syssem.c \
   thread/generic/SDL_systhread.c \
   thread/generic/SDL_systls.c \
