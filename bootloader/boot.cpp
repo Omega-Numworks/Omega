@@ -80,6 +80,12 @@ __attribute__ ((noreturn)) void Boot::bootloader() {
         if (scan == Ion::Keyboard::State(Ion::Keyboard::Key::OnOff)) {
                 Ion::Device::Reset::core();
         }
+        // 6 => STM32 system bootloader (ROM DFU), exit with the reset button
+        if (scan == Ion::Keyboard::State(Ion::Keyboard::Key::Six)) {
+            Bootloader::Interface::drawMessageBox("STM32 bootloader (DFU 0483:df11)", "Press RESET on the back to exit");
+            Ion::Timing::msleep(1000);
+            Ion::Device::Reset::jumpToSTBootloader();
+        }
         //allow to set bootmode with 1 and 2
         if (scan == Ion::Keyboard::State(Ion::Keyboard::Key::One)) {
             Bootloader::Boot::setMode(Bootloader::BootMode::SlotA);

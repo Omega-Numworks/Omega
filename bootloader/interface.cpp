@@ -62,6 +62,7 @@ void Interface::draw(int currentUSB) {
   ctx->drawString("Slot A:", KDPoint(0, 0),  KDFont::SmallFont, KDColorWhite, KDColorBlack);
   ctx->drawString("Slot B:", KDPoint(0, 13), KDFont::SmallFont, KDColorWhite, KDColorBlack);
   ctx->drawString("Current:", KDPoint(0, 26),  KDFont::SmallFont, KDColorWhite, KDColorBlack);
+  ctx->drawString("Press (6) for STM32 bootloader", KDPoint(0, 39),  KDFont::SmallFont, KDColorWhite, KDColorBlack);
 
   if (Boot::mode() == BootMode::SlotA) {
     ctx->drawString("Slot A", KDPoint(63, 26),  KDFont::SmallFont, KDColorWhite, KDColorBlack);

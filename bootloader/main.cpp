@@ -3,6 +3,7 @@
 #include <assert.h>
 
 #include <bootloader/boot.h>
+#include <ion/src/device/shared/drivers/reset.h>
 
 __attribute__ ((noreturn)) void ion_main(int argc, const char * const argv[]) {
   // Clear the screen
@@ -25,8 +26,11 @@ __attribute__ ((noreturn)) void ion_main(int argc, const char * const argv[]) {
 
   uint64_t scan = Ion::Keyboard::scan();
 
+  // Reset+6 => Launch STM32 system bootloader (ROM DFU)
+  if (scan == Ion::Keyboard::State(Ion::Keyboard::Key::Six)) {
+    Ion::Device::Reset::jumpToSTBootloader();
   // Reset+4 => Launch bootloader
-  if (scan == Ion::Keyboard::State(Ion::Keyboard::Key::Four)) {
+  } else if (scan == Ion::Keyboard::State(Ion::Keyboard::Key::Four)) {
     Bootloader::Boot::bootloader();
   // Reset+1 => Launch slot A
   } else if (scan == Ion::Keyboard::State(Ion::Keyboard::Key::One)) {
