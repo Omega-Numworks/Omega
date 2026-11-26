@@ -28,24 +28,6 @@ const UserlandHeader* Slot::userland2Header() const {
 }
 
 [[ noreturn ]] void Slot::boot() const {
-	//protection mechanism against bootloader update introduced in E20
-	//check if the slot use Userland2Header
-	if (m_userland2Header->isValid()) {
-		if (kernelHeader() == (void*)0x90000000) {
-			//check if 0x90010000 = 0xFFFFFFFF
-			if (*(uint32_t*)0x90010000 != 0xFFFFFFFF) {
-				Ion::Device::ExternalFlash::EraseSector(9);
-			}
-		}
-		else if (kernelHeader() == (void*)0x90400000) {
-			//check if 0x90410000 = 0xFFFFFFFF
-			if (*(uint32_t*)0x90410000 != 0xFFFFFFFF) {
-				Ion::Device::ExternalFlash::EraseSector(73);
-			}
-			
-		}
-		
-	}
   // Configure the MPU for the booted firmware
   Ion::Device::Board::bootloaderMPU();
 
