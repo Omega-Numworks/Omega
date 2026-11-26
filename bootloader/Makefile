@@ -1,6 +1,7 @@
 
 bootloader_src += $(addprefix bootloader/,\
   boot.cpp \
+  bootloader_header.cpp \
   main.cpp \
   kernel_header.cpp \
   userland_header.cpp \
