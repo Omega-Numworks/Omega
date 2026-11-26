@@ -1,6 +1,12 @@
 #ifndef ION_DEVICE_SHARED_USB_CALCULATOR_H
 #define ION_DEVICE_SHARED_USB_CALCULATOR_H
 
+/* USB bcdDevice, set per MODEL in build/defaults.mak. 0x0100 is the legacy
+ * value, which the official updater cannot map to a specific model. */
+#ifndef ION_USB_BCD_DEVICE
+#define ION_USB_BCD_DEVICE 0x0100
+#endif
+
 #include <stddef.h>
 #include <assert.h>
 #include <drivers/usb.h>
@@ -41,7 +47,7 @@ public:
         64,     // bMaxPacketSize0: Maximum packet size for endpoint 0
         0x0483, // idVendor
         0xA291, // idProduct
-        0x0100, // bcdDevice: Device Release Number
+        ION_USB_BCD_DEVICE, // bcdDevice: hardware model (0x0110 N0110, 0x0115 N0115), see build/defaults.mak
         1,      // iManufacturer: Index of the manufacturer name string, see m_descriptor
         2,      // iProduct: Index of the product name string, see m_descriptor
         3,      // iSerialNumber: Index of the SerialNumber string, see m_descriptor
